@@ -1,3 +1,59 @@
+# Funcionalidades do Sistema
+
+O sistema do desafio avanade conta com telas completas para gestão de estoque, vendas e autenticação Abaixo estão listadas as funcionalidades com as imagens do sistema
+
+## Login
+
+![Tela de Produtos](imgs/login.png)
+
+- Tela de autenticação.
+- Validação de email e senha via serviço de Autenticação
+- Redirecionamento para o painel após login bem sucedido
+
+## Gerenciamento de Produtos
+
+#### **Listagem de Produtos**
+
+![Tela de Produtos](imgs/produtos.png)
+
+- Exibe todos os produtos cadastrados
+- Mostra nome, quantidade, preço
+- Ações rápidas de editar e excluir.
+
+#### **Adicionar Produto**
+
+![Tela de Add Produtos](imgs/addproduto.png)
+
+- Formulário para cadastrar novos produtos
+- Campos para nome, quantidade, preço
+- Podendo tbm ao Adicionar ser Editado
+
+## Vendas
+
+### **Nova Venda**
+
+![Tela de Vendas](imgs/venda.png)
+
+![Tela de Add Vendas](imgs/addvenda.png)
+
+- Página para adicionar uma nova venda
+- Selecionar o produto cadastrado , quantidade e cálculo automático do valor total
+- No backend tem a comunicação com o microserviço de Vendas via RabbitMQ se der erro e nao tiver estoque suficiente dispara o alerta que não tem estoque suficiente
+
+### **Visualizar Venda**
+
+![Tela de Visualizar Vendas](imgs/visualizarvenda.png)
+
+- Tela de detalhes de uma venda especifica
+
+## Estatísticas
+
+![Tela de Dashboard](imgs/estatiticas.png)
+
+- Dashboard com alguns dados do sistema
+
+
+
 # Instalação e Configuração
 
 Siga os passos abaixo para rodar o projeto localmente
@@ -76,3 +132,54 @@ npm run dev
 ```
 
 O sistema estará acessível em: http://localhost:3000
+
+## Testes Unitários
+
+Este projeto tem testes unitários para as apis de **Vendas** e **Estoque** garantindo que as principais regras de negócio funcionem como esperado
+
+Utilizamos:
+- **xUnit**  
+- **Entity Framework Core In-Memory** 
+- **Moq** 
+
+---
+
+## Testes Implementados
+
+### 1. **Teste do ProdutosController**
+**Arquivo:** `ProdutosControllerTests.cs`  
+**Método testado:** `ListarProdutos()`
+
+**O que ele faz?**
+- Cria um banco de dados falso em memória.  
+- Insere dois produtos: **"mouse gamer"** e **"teclado mecanico"**.  
+- Chama o endpoint `ListarProdutos`.  
+- Valida se:
+  - A resposta é **200 OK**
+  - A lista contém **exatamente 2 produtos** cadastrados.
+
+
+### 2. **Teste do VendasController**
+**Arquivo:** `VendasControllerTests.cs`  
+**Método testado:** `GetEstatisticas()`
+
+**O que ele faz?**
+- Usa **Moq** para simular dependências complexas, como `IHttpClientFactory` e `IMessageProducer`.  
+- Adiciona dois pedidos falsos no banco em memória.  
+- Chama o endpoint `GetEstatisticas`.  
+- Valida se o DTO retorna corretamente:
+  - **Total de vendas**
+  - **Soma dos valores** de todos os pedidos
+
+
+## Como Executar
+
+Para rodar todos os testes do projeto va para 
+```bash
+backend\src\Vendas.Tests> 
+```
+e rode : 
+```bash
+dotnet test
+```
+
