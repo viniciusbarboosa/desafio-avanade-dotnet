@@ -1,3 +1,22 @@
+## Tecnologias Utilizadas
+
+Este projeto foi construído com uma arquitetura de microserviço
+
+---
+
+## Back-End
+- **.NET com C#**: Plataforma  da APIs REST 
+- **Entity Framework Core**: Utilizado para comunicação com o banco de dados
+
+---
+
+## Front-End
+- **Next.js (React)**: Framework utilizado para construir o front-end
+- **Tailwind CSS**: Para estilização 
+- **Shadcn/ui**: Biblioteca de componentes
+
+---
+
 # Funcionalidades do Sistema
 
 O sistema do desafio avanade conta com telas completas para gestão de estoque, vendas e autenticação Abaixo estão listadas as funcionalidades com as imagens do sistema
